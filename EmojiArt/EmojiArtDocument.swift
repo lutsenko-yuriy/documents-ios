@@ -32,7 +32,7 @@ class EmojiArtDocument: ObservableObject {
     }
     
     func move(emoji: EmojiArtModel.Emoji, by offset: CGSize) {
-        if let index = emojiArt.emojis.firstIndex(of: emoji) {
+        if let index = emojiArt.emojis.index(matching: emoji) {
             emojiArt.emojis[index].x += Int(offset.width)
             emojiArt.emojis[index].y += Int(offset.height)
         }
