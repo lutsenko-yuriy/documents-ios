@@ -27,6 +27,22 @@ extension CGRect {
     }
 }
 
+extension URL {
+    var imageURL: URL {
+        let urlQuery = query ?? ""
+        for query in urlQuery.components(separatedBy: "&") {
+            let queryComponents = query.components(separatedBy: "=")
+            if queryComponents.count == 2 {
+                if queryComponents.first == "imgurl", let url = URL(string: queryComponents[1].removingPercentEncoding ?? "") {
+                    return url
+                }
+            }
+        }
+        
+        return baseURL ?? self
+    }
+}
+
 extension CGPoint {
     static func -(lhs: Self, rhs: Self) -> CGSize {
         CGSize(width: lhs.x - rhs.x, height: lhs.y - rhs.y)
